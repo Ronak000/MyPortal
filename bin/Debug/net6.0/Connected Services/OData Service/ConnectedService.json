@@ -1,0 +1,43 @@
+﻿{
+  "ProviderId": "Microsoft.OData.ConnectedService",
+  "Version": "1.1.0.0",
+  "GettingStartedDocument": {
+    "Uri": "http://odata.github.io/odata.net/"
+  },
+  "ExtendedData": {
+    "EnableNamingAlias": true,
+    "IgnoreUnexpectedElementsAndAttributes": true,
+    "IncludeT4File": false,
+    "ExcludedOperationImports": [],
+    "ExcludedBoundOperations": [],
+    "OmitVersioningInfo": false,
+    "ServiceName": "OData Service",
+    "Endpoint": "https://api.businesscentral.dynamics.com/v2.0/d75c0c67-641f-4411-b0ab-d629b669932d/Latest/ODataV4/$metadata",
+    "EdmxVersion": {
+      "Major": 4,
+      "Minor": 0,
+      "Build": 0,
+      "Revision": 0,
+      "MajorRevision": 0,
+      "MinorRevision": 0
+    },
+    "GeneratedFileNamePrefix": "Reference",
+    "UseNamespacePrefix": false,
+    "NamespacePrefix": null,
+    "UseDataServiceCollection": true,
+    "MakeTypesInternal": false,
+    "OpenGeneratedFilesInIDE": false,
+    "GenerateMultipleFiles": false,
+    "CustomHttpHeaders": "Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IjNQYUs0RWZ5Qk5RdTNDdGpZc2EzWW1oUTVFMCIsImtpZCI6IjNQYUs0RWZ5Qk5RdTNDdGpZc2EzWW1oUTVFMCJ9.eyJhdWQiOiJodHRwczovL2FwaS5idXNpbmVzc2NlbnRyYWwuZHluYW1pY3MuY29tIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvZDc1YzBjNjctNjQxZi00NDExLWIwYWItZDYyOWI2Njk5MzJkLyIsImlhdCI6MTcyOTI1MjEzOCwibmJmIjoxNzI5MjUyMTM4LCJleHAiOjE3MjkyNTYwMzgsImFpbyI6ImsyQmdZS2p2N2RtejVGeVNUSXVOdnNOMGdjM2ZBUT09IiwiYXBwaWQiOiI2MjhhNzI0OS0zMDAzLTRmYmYtYjg4MS00NjhjNDhmNzg4ZTQiLCJhcHBpZGFjciI6IjEiLCJpZHAiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9kNzVjMGM2Ny02NDFmLTQ0MTEtYjBhYi1kNjI5YjY2OTkzMmQvIiwiaWR0eXAiOiJhcHAiLCJvaWQiOiI4NDAwMDdjZS05MDdlLTQ3YjMtOWMwYi1lYjZhYmQxYjI1Y2EiLCJyaCI6IjAuQVVvQVp3eGMxeDlrRVVTd3E5WXB0bW1UTFQzdmJabHNzMU5CaGdlbV9Ud0J1Si1KQUFBLiIsInJvbGVzIjpbIkF1dG9tYXRpb24uUmVhZFdyaXRlLkFsbCIsImFwcF9hY2Nlc3MiLCJBZG1pbkNlbnRlci5SZWFkV3JpdGUuQWxsIiwiQVBJLlJlYWRXcml0ZS5BbGwiXSwic3ViIjoiODQwMDA3Y2UtOTA3ZS00N2IzLTljMGItZWI2YWJkMWIyNWNhIiwidGlkIjoiZDc1YzBjNjctNjQxZi00NDExLWIwYWItZDYyOWI2Njk5MzJkIiwidXRpIjoiTmIyZExQYk9MMHlrcWVuOXZXVVZBQSIsInZlciI6IjEuMCIsInhtc19pZHJlbCI6IjcgMjQifQ.c_YQTHEkhbzX66ceRe0JRJYRQlZEvMHDFcmsexgeS6Sk2jqMT5tbTl6wbFOEggr492FX2ACxWfPIhuvcfVHuo6afec9CZt3aK4K7BzyhR0FGXI2gzvV1z9PO5V8N8G-fK4F-A6di5-9Fq4yG4ezdo0hsfntiLiY0zsvIWmqjX_vPqIW6URyCu4g6aCgVgnYm9Rt4A3CinGKZBouXKN6KH3PpeWTCsaDHCaBS6GPyi5urA9doLROf0ZDBbD1ipMKc5ZgZKrwW2lH2fBaiC1OaV7-2yH9YZAt4CCWycWV3n5VEqobV8Izg1VgpRwNwnm3Aal4B4whgHn22K1KL1-jUOg",
+    "IncludeWebProxy": false,
+    "WebProxyHost": null,
+    "IncludeWebProxyNetworkCredentials": false,
+    "StoreWebProxyNetworkCredentials": false,
+    "WebProxyNetworkCredentialsUsername": null,
+    "WebProxyNetworkCredentialsPassword": null,
+    "WebProxyNetworkCredentialsDomain": null,
+    "IncludeCustomHeaders": true,
+    "StoreCustomHttpHeaders": true,
+    "ExcludedSchemaTypes": []
+  }
+}

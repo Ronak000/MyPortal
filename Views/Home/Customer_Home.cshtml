@@ -1,0 +1,106 @@
+﻿@{
+  ViewData["Title"] = "Home";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>@ViewData["Title"] - MyPortal</title>
+
+  <link rel="stylesheet" href="~/css/Customer_Home.css" asp-append-version="true" />
+
+
+</head>
+
+<body>
+  <header>
+    <div class="header-container">
+      <h2 style="text-align: center;">Customer Details</h2>
+      
+    </div>
+  </header>
+
+  @* <div id="mainHome">
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Dashboard</span>
+  </div> *@
+  <div class="nav-toggle">
+    <button class="btn btn-toggle toggle-sidebar">
+        <i class="gg-menu-right"></i>
+    </button>
+</div>
+  <div id="mySidenav" class="sidenav">
+    @* <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> *@
+    <label style="font-size: large; text-align: center; margin-right: 20px; color: rgb(255, 255, 255);" for="dashboard">Dashboard</label>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+  </div>
+
+
+  <div class="containerdashboard">
+    <pre id="userData"></pre> <!-- Placeholder to display the data -->
+    <div class="data-box">
+      <div class="data-row">
+        <div class="label">No</div>
+        <div class="value" id="no"></div>
+
+        <div class="label">Name</div>
+        <div class="value" id="name"></div>
+
+        <div class="label">Contact</div>
+        <div class="value" id="contact"></div>
+      </div>
+    </div>
+    <div class="data-box">
+      <div class="data-row">
+        <div class="label">Country</div>
+        <div class="value" id="country"></div>
+
+        <div class="label">Balance</div>
+        <div class="value" id="balance"></div>
+
+        <div class="label">Sales</div>
+        <div class="value" id="sales"></div>
+      </div>
+    </div>
+
+  </div>
+
+
+<script>
+
+  // Check if there is data in sessionStorage
+  var apiData = JSON.parse(sessionStorage.getItem("userData"));
+
+  if (apiData) {
+    // Parse the data from sessionStorage
+    console.log(apiData);
+    document.getElementById("no").innerHTML = apiData.No;
+    document.getElementById("name").textContent = apiData.Name;
+    document.getElementById("contact").textContent = apiData.Contact;
+    document.getElementById("country").textContent = apiData.Country_Region_Code;
+    document.getElementById("balance").textContent = apiData.Balance_LCY;
+    document.getElementById("sales").textContent = apiData.Sales_LCY;
+
+  } else {
+    document.getElementById("userData").textContent = "No data found!";
+  }
+
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("mainHome").style.marginLeft = "250px";
+  }
+
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("mainHome").style.marginLeft = "0";
+  }
+</script>
+
+  <script src="~/assets/js/plugin/webfont/webfont.min.js"></script>
+</body>
+
+</html>
