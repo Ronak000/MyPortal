@@ -5,7 +5,9 @@
 
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-<div class="containerlogin">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<div class="login-container">
   <div class="frame">
     <div class="nav">
       <ul class="links">
@@ -17,15 +19,17 @@
     <form id="loginform" class="form-login" action="" method="post" name="form">
       <label for="username">Email</label>
       <input class="form-styling" type="text" name="username" id="username" placeholder="" />
+
       <label for="password">Password</label>
       <input class="form-styling" type="password" name="password" id="password" placeholder="" />
+        
       <div class="btn-animate">
         <button type="submit" class="btn-login">Log in</button>
       </div>
     </form>
 
     <div class="forgot">
-      <a href="#">Forgot your password?</a>
+      <a href="#" onclick="forgotPassword()">Forgot your password?</a>
     </div>
 
     <div id="toast" class="toast">Invalid username or password</div>
@@ -36,6 +40,18 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+  const togglePassword = document.querySelector('#togglePassword');
+    const passwordField = document.querySelector('#password');
+
+    togglePassword.addEventListener('click', function () {
+        // Toggle the type attribute
+        const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordField.setAttribute('type', type);
+        
+        // Toggle the eye icon
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+    });
   function showToast() {
     var toast = document.getElementById("toast");
     toast.className = "toast show";
@@ -94,7 +110,7 @@
           }).showToast();
           sessionStorage.setItem("userData", JSON.stringify(data.value[0]));
           setTimeout(function () {
-            
+
             // If the status code is 200 (OK), redirect to the Privacy page
             window.location.href = "/Home/Customer_Home";  // Redirect to Privacy page
           }, 1000);
@@ -113,4 +129,86 @@
           }).showToast();
         });
   });
+
+  // forget password
+  function forgotPassword() {
+    var email = document.getElementById("username").value;
+    debugger;
+    // Check if the email field is empty
+    if (!email) {
+      Toastify({
+        text: "Please enter your email",
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "center",
+        backgroundColor: "orange",
+      }).showToast();
+      return;  // Stop further execution
+    }
+
+    // Perform simple email validation (optional)
+    var emailPattern = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+    if (!emailPattern.test(email)) {
+      Toastify({
+        text: "Please enter a valid email",
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "center",
+        backgroundColor: "red",
+      }).showToast();
+      return;  // Stop further execution
+    }
+
+    // Call the API to trigger the GenerateTempPassword procedure
+    fetch("https://localhost:7003/api/Account/ForgetPassword", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email: email })
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.success) {
+          // Success - Temp password generated
+          Toastify({
+            text: "A temporary password has been sent to your email.",
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "center",
+            backgroundColor: "green",
+          }).showToast();
+        } else {
+          // Procedure returned false
+          Toastify({
+            text: "Error: Email not found or invalid.",
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "center",
+            backgroundColor: "red",
+          }).showToast();
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        // Show error toast notification
+        Toastify({
+          text: "An error occurred!",
+          duration: 3000,
+          close: true,
+          gravity: "top",
+          position: "center",
+          backgroundColor: "orange",
+        }).showToast();
+      });
+  }
 </script>

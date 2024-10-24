@@ -15,90 +15,127 @@
 </head>
 
 <body>
-  <header>
-    <div class="header-container">
-      <h2 style="text-align: center;">Customer Details</h2>
-      
-    </div>
-  </header>
+  <div id="loading" class="loading" style="display: none;">
+    <div class="spinner"></div>
+    <p>Loading...</p>
+  </div>
+  <div class="dashboard-container">
+    <nav class="sidebar">
+      <ul>
+        <li><a href="#" id="dashboard-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+        <li><a href="#"><i class="fas fa-users"></i> Users</a></li>
+        <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+      </ul>
+    </nav>
 
-  @* <div id="mainHome">
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Dashboard</span>
-  </div> *@
-  <div class="nav-toggle">
-    <button class="btn btn-toggle toggle-sidebar">
-        <i class="gg-menu-right"></i>
-    </button>
-</div>
-  <div id="mySidenav" class="sidenav">
-    @* <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> *@
-    <label style="font-size: large; text-align: center; margin-right: 20px; color: rgb(255, 255, 255);" for="dashboard">Dashboard</label>
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
+    <!-- Main Content -->
+    <main class="content">
+      <div class="header">
+        <h2>Welcome to the User Dashboard</h2>
+        <h2>Customer Details</h2>
+      </div>
+    </main>
+  </div>
+  <!-- User Details -->
+  <div class="section">
+    <h3>General Information</h3>
+    @* <div class="user-info-card"> *@
+    <div class="user-details">
+      <div class="user-detail-item">
+        <p class="key">No:</p>
+        <p class="value" id="no">Loading...</p>
+      </div>
+      <div class="user-detail-item">
+        <p class="key">Name:</p>
+        <p class="value" id="name">Loading...</p>
+      </div>
+      <div class="user-detail-item">
+        <p class="key">Balance:</p>
+        <p class="value" id="balance">Loading...</p>
+      </div>
+      <div class="user-detail-item">
+        <p class="key">Balance Due:</p>
+        <p class="value" id="balance_due">Loading...</p>
+      </div>
+      <div class="user-detail-item">
+        <p class="key">Credit Limit ($):</p>
+        <p class="value" id="credit_limit">Loading...</p>
+      </div>
+      <div class="user-detail-item">
+        <p class="key">Total Sales:</p>
+        <p class="value" id="total_sales">Loading...</p>
+      </div>
+    </div>
+  </div>
+  <!-- end user info card-->
+  <div class="section">
+    <h3>Address</h3>
+    @* <div class="user-info-card"> *@
+    <div class="user-details">
+      <div class="user-detail-item">
+        <p class="key">Address:</p>
+        <p class="value" id="address">Loading...</p>
+      </div>
+      <div class="user-detail-item">
+        <p class="key">Country/Region_Code:</p>
+        <p class="value" id="country_region_code">Loading...</p>
+      </div>
+      <div class="user-detail-item">
+        <p class="key">Phone No:</p>
+        <p class="value" id="phone_no">Loading...</p>
+      </div>
+      <div class="user-detail-item">
+        <p class="key">Location Code:</p>
+        <p class="value" id="location_code">Loading...</p>
+      </div>
+    </div>
   </div>
 
 
-  <div class="containerdashboard">
-    <pre id="userData"></pre> <!-- Placeholder to display the data -->
-    <div class="data-box">
-      <div class="data-row">
-        <div class="label">No</div>
-        <div class="value" id="no"></div>
 
-        <div class="label">Name</div>
-        <div class="value" id="name"></div>
+  <script>
 
-        <div class="label">Contact</div>
-        <div class="value" id="contact"></div>
-      </div>
-    </div>
-    <div class="data-box">
-      <div class="data-row">
-        <div class="label">Country</div>
-        <div class="value" id="country"></div>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Fetch user data from sessionStorage
+      const apiData = JSON.parse(sessionStorage.getItem("userData"));
 
-        <div class="label">Balance</div>
-        <div class="value" id="balance"></div>
+      // Function to update the UI with fetched data
+      function updateUserInfo() {
+        if (apiData) {
+          // Check if apiData is not null and populate fields
+          console.log(apiData);
+          document.getElementById("no").textContent = apiData.No || "N/A";
+          document.getElementById("name").textContent = apiData.Name || "N/A";
+          document.getElementById("balance").textContent = apiData.Balance_LCY || "N/A";
+          document.getElementById("balance_due").textContent = apiData.Balance_Due_LCY || "N/A";
+          document.getElementById("credit_limit").textContent = apiData.Credit_Limit_LCY || "N/A";
+          document.getElementById("total_sales").textContent = apiData.Sales_LCY || "N/A";
 
-        <div class="label">Sales</div>
-        <div class="value" id="sales"></div>
-      </div>
-    </div>
+          document.getElementById("address").textContent = apiData.Name || "N/A";
+          document.getElementById("country_region_code").textContent = apiData.Country_Region_Code || "N/A";
+          document.getElementById("phone_no").textContent = apiData.Phone_No || "N/A";
+          document.getElementById("location_code").textContent = apiData.Location_Code || "N/A";
+          
 
-  </div>
+        } else {
+          document.getElementById("userData").textContent = "No data found!";
+        }
+      }
 
+      // Initial data load
+      updateUserInfo();
 
-<script>
+      // Refresh the dashboard on clicking the dashboard link
+      document.getElementById("dashboard-link").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent the default link action
+        document.getElementById("loading").style.display = "flex"; // Show loading indicator
+        setTimeout(() => {
+          location.reload(); // Refresh the page after a short delay
+        }, 500); // Delay to allow the loading indicator to show
+      });
+    });
 
-  // Check if there is data in sessionStorage
-  var apiData = JSON.parse(sessionStorage.getItem("userData"));
-
-  if (apiData) {
-    // Parse the data from sessionStorage
-    console.log(apiData);
-    document.getElementById("no").innerHTML = apiData.No;
-    document.getElementById("name").textContent = apiData.Name;
-    document.getElementById("contact").textContent = apiData.Contact;
-    document.getElementById("country").textContent = apiData.Country_Region_Code;
-    document.getElementById("balance").textContent = apiData.Balance_LCY;
-    document.getElementById("sales").textContent = apiData.Sales_LCY;
-
-  } else {
-    document.getElementById("userData").textContent = "No data found!";
-  }
-
-  function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-    document.getElementById("mainHome").style.marginLeft = "250px";
-  }
-
-  function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("mainHome").style.marginLeft = "0";
-  }
-</script>
+  </script>
 
   <script src="~/assets/js/plugin/webfont/webfont.min.js"></script>
 </body>

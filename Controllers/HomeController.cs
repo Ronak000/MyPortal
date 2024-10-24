@@ -17,19 +17,13 @@ public class HomeController : Controller
     {
         return View();
     }
-    // public IActionResult Login()
-    // {
-    //     return View();
-    // }
 
     public IActionResult Customer_Home()
     {
         return View();
     }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
+    public IActionResult Change_Password()
     {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        return View();
     }
 }

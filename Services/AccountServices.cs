@@ -13,8 +13,10 @@ namespace MyPortal.Services
     public class AccountServices
     {
         private readonly DatabaseContext _context;
-        public AccountServices(DatabaseContext context)
+        private readonly UserServices _userService;
+        public AccountServices(DatabaseContext context, UserServices userService)
         {
+            _userService = userService;
             _context = context;
         }
 
@@ -26,11 +28,11 @@ namespace MyPortal.Services
             }
             if (_context.Database.CanConnect())
             {
-                Console.WriteLine( "Connection successful!");
+                Console.WriteLine("Connection successful!");
             }
             else
             {
-                Console.WriteLine(  "Failed to connect to the database.");
+                Console.WriteLine("Failed to connect to the database.");
             }
             var User = new ClientUser()
             {
@@ -44,6 +46,46 @@ namespace MyPortal.Services
             _context.SaveChanges();
 
             return new NoContentResult();
+        }
+
+        // public async Task<IActionResult> ChangePassword(string email, string password)
+        // {
+
+        // }
+
+        public async Task<IActionResult> TemporaryPassword(string email)
+        {
+
+            bool IsUserExist = await _userService.CheckUSerExist(email);
+            if (IsUserExist)
+            {
+                var Temp = await _userService.GetTempPassword(email);
+                if (!Temp)
+                {
+                    return new BadRequestObjectResult(new { success = false, message = "Error generating temporary password or email not found." });
+                }
+                else
+                {
+                    return new OkObjectResult(new { success = true, message = "A temporary password has been sent to your email." });
+                }
+            }
+            else
+            {
+                return new BadRequestObjectResult("Enter business central email id to change password");
+            }
+        }
+
+        public async Task<IActionResult> ChangePassword(string email, string password)
+        {
+            var Temp = await _userService.GetChangePassword(email, password);
+            if (!Temp)
+            {
+                return new BadRequestObjectResult(new { success = false, message = "Error generating temporary password or email not found." });
+            }
+            else
+            {
+                return new OkObjectResult(new { success = true, message = "A password has been changed." });
+            }
         }
     }
 }
